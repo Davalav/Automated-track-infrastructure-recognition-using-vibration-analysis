@@ -41,9 +41,9 @@ print("Select Speed File")
 load_file("speed")
 
 
-# ====================
+# --------------------------
 # Load Data 1 infrastructure
-# ====================
+# --------------------------
 Bridge = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Resultat_Bridge.csv")
 RailJoint = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Resultat_RailJoint.csv")
 Turnouts = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Turnout.csv")
@@ -107,28 +107,18 @@ def count_close_points(df_gps, infra_df, threshold=0.2):
 
     return close_count
 
-if not df_gps.empty:
+if not df_gps.empty: 
     bridge_hits = count_close_points(df_gps, Bridge)
     railjoint_hits = count_close_points(df_gps, RailJoint)
     turnout_hits = count_close_points(df_gps, Turnouts)
 
-    print("\nTrack overlap check")
+    print("\nTrack overlap check") # This prints are used to see that the mapping between data 1 and 2 are correct, for this simulation to be accurate.
     print("Bridges near GPS:", bridge_hits, "/", len(Bridge))
     print("RailJoints near GPS:", railjoint_hits, "/", len(RailJoint))
     print("Turnouts near GPS:", turnout_hits, "/", len(Turnouts))
 
     print("GPS lat range:", df_gps["Latitude"].min(), "to", df_gps["Latitude"].max())
     print("GPS lon range:", df_gps["Longitude"].min(), "to", df_gps["Longitude"].max())
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -209,7 +199,7 @@ if not df_gps.empty:
     ))
     try:
        # map_fig.write_image("grade3_map.png", scale=2)
-        map_fig.write_html("grade3_map.html")
+        map_fig.write_html("grade3_map.html") # Inbuilt function that creates the figure in a html file.
         print("Saved: grade3_map.png and grade3_map.html")
 
     except Exception as e:
@@ -298,9 +288,18 @@ def update_vibration_plot(clickData):
 # Run the Dash App
 # ====================
 if __name__ == "__main__":
-    print("Starting dahs app.. please work!")
+    print("Starting Dash Website")
     app.run_server(debug=True, port=8060)
 
-#& "C:\Users\david\anaconda3\envs\nnln\python.exe" code2_dash.py
-#http://127.0.0.1:8060/
-#C:\Users\david\Desktop\Maintenance Assignment 4\Data 2\Data 2\2024-12-10 12-00-00 (1)
+"""
+SIMULATION
+
+First: putting this in terminal
+& "C:\Users\david\anaconda3\envs\nnln\python.exe" code2_dash.py
+
+Website url:
+http://127.0.0.1:8060/
+
+Map used from Data 2:
+C:\Users\david\Desktop\Maintenance Assignment 4\Data 2\Data 2\2024-12-10 12-00-00 (1)
+"""
