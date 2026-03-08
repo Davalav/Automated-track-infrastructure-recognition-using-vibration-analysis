@@ -291,15 +291,15 @@ if __name__ == "__main__":
     print("Starting Dash Website")
     app.run_server(debug=True, port=8060)
 
-"""
-SIMULATION
 
-First: putting this in terminal
-& "C:\Users\david\anaconda3\envs\nnln\python.exe" code2_dash.py
+#SIMULATION
 
-Website url:
-http://127.0.0.1:8060/
+#First: putting this in terminal
+#& "C:\Users\david\anaconda3\envs\nnln\python.exe" ".\code2_dash.py"
 
-Map used from Data 2:
-C:\Users\david\Desktop\Maintenance Assignment 4\Data 2\Data 2\2024-12-10 12-00-00 (1)
-"""
+#Website url:
+#http://127.0.0.1:8060/
+
+#Map used from Data 2:
+#C:\Users\david\Desktop\Maintenance Assignment 4\Data 2\Data 2\2024-12-10 12-00-00 (1)
+#
