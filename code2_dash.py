@@ -120,23 +120,24 @@ else:
 if not df_gps.empty:
     # Use custom_data to store the point index so that it will be available in callbacks.
     map_fig = px.scatter_mapbox(
-        df_gps,
+        df_gps, 
         lat="Latitude",
         lon="Longitude",
         custom_data=["PointIndex"],
         zoom=10,
         title="GPS Points with Vibration Data"
     )
-    map_fig.update_layout(mapbox_style="open-street-map", height=600)
-    map_fig.add_trace(go.Scattermapbox(
-    lat=Bridge["Latitude"],
-    lon=Bridge["Longitude"],
-    mode="markers",
-    marker=dict(size=8, color="red"),
+    map_fig.update_layout(mapbox_style="open-street-map", height=600) # Open-street-map --> Meaning the map that we see in the background of our dots are the same as the real one.
+    
+    map_fig.add_trace(go.Scattermapbox(  # Adding the points from Bridge data
+    lat=Bridge["Latitude"], # Sends full Latitude Column
+    lon=Bridge["Longitude"], # Sends full Longitude Columns
+    mode="markers", # Writes dots
+    marker=dict(size=8, color="red"), # Descriptive of marker
     name="Bridge"
     ))
 
-    map_fig.add_trace(go.Scattermapbox(
+    map_fig.add_trace(go.Scattermapbox( # Adding the points from RailJoints data
         lat=RailJoint["Latitude"],
         lon=RailJoint["Longitude"],
         mode="markers",
@@ -144,7 +145,7 @@ if not df_gps.empty:
         name="RailJoint"
     ))
 
-    map_fig.add_trace(go.Scattermapbox(
+    map_fig.add_trace(go.Scattermapbox( # Adding the points from Turnout data
         lat=Turnouts["Latitude"],
         lon=Turnouts["Longitude"],
         mode="markers",
