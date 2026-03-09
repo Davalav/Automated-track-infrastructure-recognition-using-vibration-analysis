@@ -246,9 +246,6 @@ if __name__ == "__main__":
 
 
 #SIMULATION
-
-#First: putting this in terminal
-#& "C:\Users\david\anaconda3\envs\nnln\python.exe" ".\code2_dash.py"
 #Stop Simulation: Crtl c
 
 
