@@ -44,26 +44,17 @@ load_file("speed")
 # --------------------------
 # Load Data 1 infrastructure
 # --------------------------
-Bridge = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Resultat_Bridge.csv")
-RailJoint = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Resultat_RailJoint.csv")
-Turnouts = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Turnout.csv")
+Bridge = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Resultat_Bridge.csv") # Harcoding path for bridge
+RailJoint = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Resultat_RailJoint.csv") # Harcoding path for RailJoint
+Turnouts = pd.read_csv(r"C:\Users\david\Desktop\Maintenance Assignment 4\Data 1\converted_coordinates_Turnout.csv") # Harcoding path for Turnouts
 
-Bridge.columns = Bridge.columns.str.strip()
+Bridge.columns = Bridge.columns.str.strip() # Takes away whitespaces, just in case
 RailJoint.columns = RailJoint.columns.str.strip()
 Turnouts.columns = Turnouts.columns.str.strip()
 
-print("Bridge columns:", Bridge.columns.tolist())
+print("Bridge columns:", Bridge.columns.tolist()) # Checking if the csv's are loaded correctly
 print("RailJoint columns:", RailJoint.columns.tolist())
 print("Turnout columns:", Turnouts.columns.tolist())
-
-
-
-
-
-
-
-
-
 
 # Load each CSV into a DataFrame and add a 'timestamp' using the row index.
 dataframes = {}
@@ -87,43 +78,6 @@ if "latitude" in dataframes and "longitude" in dataframes:
 else:
     print("Latitude or Longitude data is missing.")
     df_gps = pd.DataFrame(columns=["Latitude", "Longitude", "PointIndex"])
-
-
-# ====================
-# Grade 3: check if run belongs to same track as Data 1
-# ====================
-def count_close_points(df_gps, infra_df, threshold=0.2):
-    if df_gps.empty or infra_df.empty:
-        return 0
-
-    gps_points = df_gps[["Latitude", "Longitude"]].values
-    close_count = 0
-
-    for _, row in infra_df.iterrows():
-        infra_point = np.array([row["Latitude"], row["Longitude"]])
-        dists = np.sqrt(np.sum((gps_points - infra_point) ** 2, axis=1))
-        if dists.min() < threshold:
-            close_count += 1
-
-    return close_count
-
-if not df_gps.empty: 
-    bridge_hits = count_close_points(df_gps, Bridge)
-    railjoint_hits = count_close_points(df_gps, RailJoint)
-    turnout_hits = count_close_points(df_gps, Turnouts)
-
-    print("\nTrack overlap check") # This prints are used to see that the mapping between data 1 and 2 are correct, for this simulation to be accurate.
-    print("Bridges near GPS:", bridge_hits, "/", len(Bridge))
-    print("RailJoints near GPS:", railjoint_hits, "/", len(RailJoint))
-    print("Turnouts near GPS:", turnout_hits, "/", len(Turnouts))
-
-    print("GPS lat range:", df_gps["Latitude"].min(), "to", df_gps["Latitude"].max())
-    print("GPS lon range:", df_gps["Longitude"].min(), "to", df_gps["Longitude"].max())
-
-
-
-
-
 
 # ====================
 # Merge the two vibration signals on 'timestamp'
