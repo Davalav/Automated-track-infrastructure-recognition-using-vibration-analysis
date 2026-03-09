@@ -155,13 +155,11 @@ if not df_gps.empty:
     try:
        # map_fig.write_image("grade3_map.png", scale=2)
         map_fig.write_html("grade3_map.html") # Inbuilt function that creates the figure in a html file.
-        print("Saved: grade3_map.png and grade3_map.html")
+        print("Saved: grade3_map.html")
 
     except Exception as e:
-        print("Could not save image automatically.")
-        print("Install kaleido with: pip install kaleido")
         print("Error:", e)
-else:
+else: # Else function if the data didn't load correctly
     map_fig = go.Figure()
     map_fig.update_layout(title="No GPS Data Available", height=600)
 
@@ -251,6 +249,8 @@ if __name__ == "__main__":
 
 #First: putting this in terminal
 #& "C:\Users\david\anaconda3\envs\nnln\python.exe" ".\code2_dash.py"
+#Stop Simulation: Crtl c
+
 
 #Website url:
 #http://127.0.0.1:8060/
